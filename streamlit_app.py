@@ -254,37 +254,19 @@ stanzas = [
      """
  ]
 
-# Initialize stanza index
+# Stanza idex
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
 
-# JavaScript to detect Spacebar press
-spacebar_script = """
-<script>
-document.addEventListener('keydown', function(e) {
-    if (e.code === 'Space') {
-        const buttons = parent.document.querySelectorAll('button');
-        buttons.forEach(btn => {
-            if (btn.innerText === 'Reveal Next Stanza') {
-                btn.click();
-            }
-        });
-    }
-});
-</script>
-"""
 
-# Display stanzas up to current index
+# show revealed stanzas
 for i in range(st.session_state.stanza_index):
     st.markdown(stanzas[i])
 
-# Button placed after current stanza
+# button AFTER new stanza
 if st.session_state.stanza_index < len(stanzas):
     if st.button("Reveal Next Stanza"):
         st.session_state.stanza_index += 1
         st.rerun()
 else:
-    st.write("You've reached the end of the poem. Thank you for journeying with me!")
-
-# Inject JavaScript to listen for spacebar
-st.components.v1.html(spacebar_script, height=0, width=0)
+    st.write("You've reached the end of the poem. Thank you for going on this journey with me!")
