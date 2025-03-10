@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
 
 st.title("Conveniently White")
-st.write("_An Interactive Slam Poem_\n\nPress **Spacebar** or click **Reveal Next Stanza** to journey through the layers of my story.")
+st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
 stanzas = [
      """
