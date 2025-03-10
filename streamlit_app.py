@@ -265,4 +265,4 @@ if st.button("Reveal Next Stanza"):
         st.markdown(stanzas[st.session_state.stanza_index])
         st.session_state.stanza_index += 1
     else:
-        st.write("You've reached the end of the poem. Thank you for journeying with me!")
+        st.write("You've reached the end of the poem. Thank you for going on this journey with me!")
