@@ -108,18 +108,21 @@ stanzas = [
     as easily as prayers,  
     stood quietly  
     as bomb squads detonated  
-    the innocent-looking threats  
-    that waited  
-    on bus-stop benches.
+    the threats that waited  
+    on bus-stop benches right outside my classroom.
     """,
     """
     **I remember that one time**  
     I hurriedly locked a bathroom stall,  
     feet tucked onto porcelain  
     to hide blinking Skechers  
-    from imagined gunmen,  
-    I learned  
-    what survival means —  
+    from some angry man,
+    banging on doors trying to get in.
+    I heard he had a knife.
+    """,
+    """
+    **So, at seven I learned,**
+    I learned what survival means —  
     a silent breath,  
     an invisible heartbeat  
     
@@ -129,16 +132,16 @@ stanzas = [
     **Trips to coffee shops ended**  
     with strangers spitting  
     lectures about _“The Jews”_  
-    at children who dared  
-    to wear their faith visibly,  
+    at children who dared to exist
+    who dared to wear their faith visibly,  
     so I learned  
     to tuck mine away,  
     only safe within walls  
-    that felt increasingly thin.
+    that became increasingly thin.
     """,
     """
-    **I walked into**  
-    the Museum of Tolerance  
+    **We went on a field trip**  
+    to the Museum of Tolerance  
     and counted swastikas carved  
     on walls.  
     We listened to survivors speak,  
@@ -159,13 +162,14 @@ stanzas = [
     around the world,  
     hate exploding openly  
     in the streets we once believed were safe.  
-    _“Activism,”_ they call it—  
-    but I recognize the whispers  
+    _“Activism,”_ they call it—
+    Yes, somtimes it is, 
+    but sometimes it's a mask,
+    because I recognize the whispers  
     of ancestors  
     crying out from Ukrainian mass-graves,  
     from Moroccan cemeteries,  
-    from Philly sidewalks  
-    marked by hatred.
+    from Philadelphia backroads.
     """,
     """
     **They ask again,**  
@@ -188,18 +192,18 @@ stanzas = [
     the fear that whispers  
     _“hide,”_  
     the anxiety that asks  
-    _“am I safe?”_  
+    _“am I safe to be myself here?”_  
     the certainty that says  
     _“never fully.”_  
     the confusion that wonders  
     _“why is that?”_  
-    the voice that whispers  
+    the voice that whispers back  
     _“because you’re Jewish”_
     """,
     """
-    **And when someone casually asks,**  
+    **And when someone comes up and asks,**  
     _“You have a Jewish nose — are you Jewish?”_  
-    I ask myself:  
+    I think to myself:  
     is that a question,  
     or an accusation?
     """,
@@ -208,7 +212,7 @@ stanzas = [
     generations of trauma,  
     doesn’t erase stories  
     my family never fully tells—  
-    but I carry them  
+    but I _carry_ them  
     in my bones,  
     in my breath,  
     in the silence  
@@ -237,7 +241,7 @@ stanzas = [
     to Philadelphia  
     to LA.  
     My whiteness  
-    never protected us,  
+    never fully protected us,  
     and never defined  
     who we are.
     """,
