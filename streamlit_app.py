@@ -263,7 +263,7 @@ def convert_markdown_to_html(text):
     text = text.replace('\n', '<br>')
     return text
 
-def create_letter_animation_html(html_text, delay_increment=0.025):
+def create_letter_animation_html(html_text, delay_increment=0.04):
     """
     Wraps each visible character with animation spans while preserving HTML tags
     """
