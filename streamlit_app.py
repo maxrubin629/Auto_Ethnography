@@ -8,7 +8,7 @@ st.set_page_config(page_title="Conveniently White", layout="centered")
 poem = textwrap.dedent("""**They ask me,**
 "Are Jews white?"
 and I pause.
-A single question
+A single breath
 holds centuries
 of contradiction.
 
@@ -32,10 +32,10 @@ slurs hurled
 like rocks,
 sharp enough
 to carve doubt
-into a child's courage.
+into a child's mind.
 
-**My father knew this pain**
-on Philadelphia streets,
+**My father knew this pain too**
+in Philadelphia backstreets,
 swastikas scratched into his car,
 his body bruised by fists,
 scars carried quietly,
@@ -48,7 +48,7 @@ to escape the shadow
 of pogroms,
 anti-Jewish violence,
 hate-filled riots,
-stories silenced
+stories _silenced_
 by pain too raw
 to speak aloud,
 ghosts whisper
@@ -57,32 +57,35 @@ in half-forgotten Yiddish sighs.
 **My mother's family lived in Morocco for centuries,**
 skin much darker than mine,
 generations born into languages older than borders,
-until Nazis reached Casablanca streets,
-signs posted on synagogues asking for names
-and numbers,
+until Nazis reached Casablanca,
+posting signs on synagogues,
+asking for names,
+house numbers,
 listing Jews like livestock.
 
-**They fled poverty,**
+**They fled danger, poverty,**
 fear, and hunger,
 crossed oceans to Oklahoma,
-where children pawed my grandmother's curls
-literally searching for horns,
+where cute little children pawed my grandmother's curls
+but they were looking for something — 
+horns,
 hooves,
 tails —
-for devils their parents swore
+for devils they were taught
 Jews must be.
 
-**I have her voice recorded,**
+**As I recall it,**
+I hear her voice,
 telling me softly,
 how strange it felt
 to have her humanity questioned
-by curious fingers,
+by curious little fingers,
 innocent and cruel
 in ignorance.
 
 **Yet, they say we're white —**
-conveniently white,
-when hate needs justification,
+_conveniently_ white.
+When hate needs justification,
 when trauma needs erasure,
 when history needs rewriting,
 as if skin alone defines our story,
@@ -90,11 +93,11 @@ as if violence checks melanin
 before it strikes.
 
 **I grew up in LA,**
-went to school behind bulletproof glass doors,
+went to school behind bulletproof glass,
 became friends with security guards,
 learned safety drills
 as easily as prayers,
-stood quietly
+sat quietly
 as bomb squads detonated
 the threats that waited
 on bus-stop benches right outside my classroom.
@@ -104,17 +107,19 @@ I hurriedly locked a bathroom stall,
 feet tucked onto porcelain
 to hide blinking Skechers
 from some angry man,
-banging on doors trying to get in.
-I heard he had a knife.
+carrying on about *"The Jews"*,
+banging on doors trying to find me.
+I later learned he had a knife.
 
-**So, at seven I learned,**
+**So, at six I learned,**
 I learned what survival means —
 a silent breath,
 an invisible heartbeat
 
-*SHHHHH!*
+***SHHHHH!***
 
-**Trips to coffee shops ended**
+**I still didn't get it**
+Trips to coffee shops ended
 with strangers spitting
 lectures about *"The Jews"*
 at children who dared to exist
@@ -179,16 +184,16 @@ the confusion that wonders
 the voice that whispers back
 *"because you're Jewish."*
 
-**And when someone comes up and asks,**
+**And when someone randomly comes up and asks,**
 *"You have a Jewish nose — are you Jewish?"*
 I think to myself:
 is that a question,
-or an accusation?
+or an _accusation?_
 
-**My skin doesn't shield**
+**You see, my skin doesn't shield**
 generations of trauma,
 doesn't erase stories
-my family never fully tells—
+my family never fully tells —
 but I *carry* them
 in my bones,
 in my breath,
@@ -215,7 +220,7 @@ woven from Morocco
 to Ukraine
 to Philadelphia
 to LA.
-My whiteness
+Our whiteness
 never fully protected us,
 and never defined
 who we are.
