@@ -1,21 +1,23 @@
 import streamlit as st
+import markdown
+from markdown.extensions.nl2br import Nl2BrExtension
 import time
 
 st.set_page_config(page_title="Conveniently White", layout="centered")
 
-# Custom CSS for fade-in shadow animation
+# Custom CSS for fade-in from shadow
 st.markdown("""
 <style>
 @keyframes fadeInShadow {
-    0% {opacity: 0; text-shadow: 0px 0px 15px rgba(0,0,0,0.9);}
-    100% {opacity: 1; text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+    from { opacity: 0; text-shadow: 0px 0px 15px rgba(0,0,0,0.8); }
+    to   { opacity: 1; text-shadow: none; }
 }
 .fade-in-shadow {
-    animation: fadeInShadow 2s ease forwards;
+    animation: fadeInShadow 1.5s ease-out forwards;
     opacity: 0;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:1rem;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -23,7 +25,7 @@ st.markdown("""
 st.title("Conveniently White")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
-# Full poem stanzas
+# Your poem stanzas
 stanzas = [
      """
      **They ask me,**  
@@ -272,31 +274,34 @@ stanzas = [
      than that.**
      """
  ]
+
 # Initialize session state
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
-if "revealed_stanzas" not in st.session_state:
-    st.session_state.revealed_stanzas = []
+if "revealed_stanzas_html" not in st.session_state:
+    st.session_state.revealed_stanzas_html = []
 
-# Display previously revealed stanzas with fade-in shadow
-for stanza in st.session_state.revealed_stanzas:
-    st.markdown(f'<div class="fade-in-shadow">{stanza}</div>', unsafe_allow_html=True)
+# Display already revealed stanzas
+for stanza_html in st.session_state.revealed_stanzas_html:
+    st.markdown(f'<div class="fade-in-shadow">{stanza_html}</div>', unsafe_allow_html=True)
 
-# Button to reveal and stream next stanza
+# Reveal and stream the next stanza when button clicked
 if st.session_state.stanza_index < len(stanzas):
     if st.button("Reveal Next Stanza"):
-        new_stanza = stanzas[st.session_state.stanza_index]
+        next_stanza_md = stanzas[st.session_state.stanza_index]
+        next_stanza_html = markdown.markdown(next_stanza_md, extensions=[Nl2BrExtension()])
+
         placeholder = st.empty()
-        streamed_text = ""
+        streamed_html = ""
+        
+        # Stream character by character safely as HTML
+        for char in next_stanza_html:
+            streamed_html += char
+            placeholder.markdown(f'<div class="fade-in-shadow">{streamed_html}</div>', unsafe_allow_html=True)
+            time.sleep(0.005)  # Adjust streaming speed here
 
-        # Stream each character
-        for char in new_stanza:
-            streamed_text += char
-            placeholder.markdown(f'<div class="fade-in-shadow">{streamed_text}</div>', unsafe_allow_html=True)
-            time.sleep(0.02)  # adjust speed as desired
-
-        # Save stanza after streaming
-        st.session_state.revealed_stanzas.append(new_stanza)
+        # Save fully revealed stanza in session state
+        st.session_state.revealed_stanzas_html.append(next_stanza_html)
         st.session_state.stanza_index += 1
 else:
     st.write("You've reached the end of the poem. Thank you for journeying with me!")
