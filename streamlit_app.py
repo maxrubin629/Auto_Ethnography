@@ -245,7 +245,7 @@ if st.session_state.stanza_index < len(stanzas):
         streamed_text = ""
         
         random_delay_choice = random.choice([1, 2, 3, 4, 5])
-        delay_mapping = {1: 0.02, 2: 0.04, 3: 0.05, 4: 0.07, 5: 0.1}
+        delay_mapping = {1: 0.02, 2: 0.03, 3: 0.04, 4: 0.05, 5: 0.6}
         selected_delay = delay_mapping[random_delay_choice]
         
         for char in new_stanza:
