@@ -1,53 +1,70 @@
 import streamlit as st
+import markdown
+from markdown.extensions.nl2br import Nl2BrExtension
 import time
-import random
 
-st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
+st.set_page_config(page_title="Conveniently White", layout="centered")
+
+# Custom CSS for shadow fade-in
+st.markdown("""
+<style>
+@keyframes fadeInShadow {
+    from { opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.8); }
+    to { opacity: 1; text-shadow: none; }
+}
+.fade-in-shadow {
+    animation: fadeInShadow 1.5s ease-out forwards;
+    opacity: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.title("Conveniently White")
-st.write("   by, Max Rubin")
-st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
+st.write("_An Interactive Slam Poem_\n\nClick **Begin Poem** to experience it unfold in real-time.")
 
-stanzas = [
-    """**They ask me,**  
+# Your full poem here (as defined previously)
+poem = """**They ask me,**  
 “Are Jews white?”  
 and I pause.  
 A single breath  
 holds centuries  
-of contradiction.""",
-    
-    """**See, my skin is fair,**  
+of contradiction.
+
+**See, my skin is fair,**  
 but the history beneath runs deep  
 in colors you can’t quite see,  
 a silent tapestry of trauma  
-woven through generations.""",
+woven through generations.
 
-    """**Imagine me, seven, in LA,**  
+**Imagine me, seven, in LA,**  
 minding my own business,  
 kippah balanced on my head  
 like a crown  
 unashamed,  
 unaware  
 of the cost  
-of visibility.""",
+of visibility.
 
-    """**Until words slice the air—**  
+**Until words slice the air—**  
 slurs hurled  
 like rocks,  
 sharp enough  
 to carve doubt  
-into a child’s courage.""",
+into a child’s courage.
 
-    """**My father knew this pain**  
+**My father knew this pain**  
 on Philadelphia streets,  
 swastikas scratched into his car,  
 his body bruised by fists,  
 scars carried quietly,  
 a trauma so deep  
 it only speaks in whispers —  
-or not at all.""",
+or not at all.
 
-    """**His grandparents fled Ukraine**  
+**His grandparents fled Ukraine**  
 to escape the shadow  
 of pogroms,  
 anti-Jewish violence,  
@@ -56,17 +73,17 @@ stories silenced
 by pain too raw  
 to speak aloud,  
 ghosts whisper  
-in half-forgotten Yiddish sighs.""",
+in half-forgotten Yiddish sighs.
 
-    """**My mother’s family lived in Morocco for centuries,**  
+**My mother’s family lived in Morocco for centuries,**  
 skin much darker than mine,  
 generations born into languages older than borders,  
 until Nazis reached Casablanca streets,  
 signs posted on synagogues asking for names  
 and numbers,  
-listing Jews like livestock.""",
+listing Jews like livestock.
 
-    """**They fled poverty,**  
+**They fled poverty,**  
 fear, and hunger,  
 crossed oceans to Oklahoma,  
 where children pawed my grandmother’s curls  
@@ -74,26 +91,26 @@ literally searching for horns,
 hooves,  
 tails —  
 for devils their parents swore  
-Jews must be.""",
+Jews must be.
 
-    """**I have her voice recorded,**  
+**I have her voice recorded,**  
 telling me softly,  
 how strange it felt  
 to have her humanity questioned  
 by curious fingers,  
 innocent and cruel  
-in ignorance.""",
+in ignorance.
 
-    """**Yet, they say we’re white —**  
+**Yet, they say we’re white —**  
 conveniently white,  
 when hate needs justification,  
 when trauma needs erasure,  
 when history needs rewriting,  
 as if skin alone defines our story,  
 as if violence checks melanin  
-before it strikes.""",
+before it strikes.
 
-    """**I grew up in LA,**  
+**I grew up in LA,**  
 went to school behind bulletproof glass doors,  
 became friends with security guards,  
 learned safety drills  
@@ -101,24 +118,24 @@ as easily as prayers,
 stood quietly  
 as bomb squads detonated  
 the threats that waited  
-on bus-stop benches right outside my classroom.""",
+on bus-stop benches right outside my classroom.
 
-    """**I remember that one time**  
+**I remember that one time**  
 I hurriedly locked a bathroom stall,  
 feet tucked onto porcelain  
 to hide blinking Skechers  
 from some angry man,  
 banging on doors trying to get in.  
-I heard he had a knife.""",
+I heard he had a knife.
 
-    """**So, at seven I learned,**  
+**So, at seven I learned,**  
 I learned what survival means —  
 a silent breath,  
 an invisible heartbeat  
 
-*SHHHHH!*""",
+*SHHHHH!*
 
-    """**Trips to coffee shops ended**  
+**Trips to coffee shops ended**  
 with strangers spitting  
 lectures about _“The Jews”_  
 at children who dared to exist  
@@ -126,9 +143,9 @@ who dared to wear their faith visibly,
 so I learned  
 to tuck mine away,  
 only safe within walls  
-that became increasingly thin.""",
+that became increasingly thin.
 
-    """**We went on a field trip**  
+**We went on a field trip**  
 to the Museum of Tolerance  
 and counted swastikas carved  
 on walls.  
@@ -137,12 +154,12 @@ heard their warnings—
 voices trembling,  
 urging us  
 to remember  
-what the world would rather forget.""",
+what the world would rather forget.
 
-    """**And we did remember,**  
-but the world has amnesia.""",
+**And we did remember,**  
+but the world has amnesia.
 
-    """**Because today,**  
+**Because today,**  
 I see Jew-hatred  
 in Los Angeles,  
 around the world,  
@@ -155,20 +172,20 @@ because I recognize the whispers
 of ancestors  
 crying out from Ukrainian mass-graves,  
 from Moroccan cemeteries,  
-from Philadelphia backroads.""",
+from Philadelphia backroads.
 
-    """**They ask again,**  
-“Are Jews white?”""",
+**They ask again,**  
+“Are Jews white?”
 
-    """**Yes. No. Both. Neither.**  
+**Yes. No. Both. Neither.**  
 My whiteness  
 is conditional,  
 a temporary badge  
 stripped away  
 when convenient  
-to hate me openly.""",
+to hate me openly.
 
-    """**My whiteness is irrelevant**  
+**My whiteness is irrelevant**  
 to the bombs next to schools and temples,  
 the swastikas carved  
 in museum stones,  
@@ -181,15 +198,15 @@ _“never fully.”_
 the confusion that wonders  
 _“why is that?”_  
 the voice that whispers back  
-_“because you’re Jewish.”_""",
+_“because you’re Jewish”_
 
-    """**And when someone comes up and asks,**  
+**And when someone comes up and asks,**  
 _“You have a Jewish nose — are you Jewish?”_  
 I think to myself:  
 is that a question,  
-or an accusation?""",
+or an accusation?
 
-    """**My skin doesn’t shield**  
+**My skin doesn’t shield**  
 generations of trauma,  
 doesn’t erase stories  
 my family never fully tells—  
@@ -199,9 +216,9 @@ in my breath,
 in the silence  
 when someone asks,  
 
-_“Are Jews white?”_""",
+_“Are Jews white?”_
 
-    """**Because the truth**  
+**Because the truth**  
 is deeper  
 than skin,  
 more complicated  
@@ -211,9 +228,9 @@ than convenient labels
 that fade  
 when the hate becomes  
 inconvenient  
-to explain.""",
+to explain.
 
-    """**I am Jewish.**  
+**I am Jewish.**  
 A testament to my family’s resilience,  
 woven from Morocco  
 to Ukraine  
@@ -222,37 +239,29 @@ to LA.
 My whiteness  
 never fully protected us,  
 and never defined  
-who we are.""",
+who we are.
 
-    """**So ask me again —**  
+**So ask me again —**  
 _“Are Jews white?”_  
 I’ll tell you:  
 **it’s more complicated  
 than that.**"""
-]
-if "stanza_index" not in st.session_state:
-    st.session_state.stanza_index = 0
-if "revealed_stanzas" not in st.session_state:
-    st.session_state.revealed_stanzas = []
 
-for stanza in st.session_state.revealed_stanzas:
-    st.markdown(stanza)
+if "started" not in st.session_state:
+    st.session_state.started = False
 
-if st.session_state.stanza_index < len(stanzas):
-    if st.button("Reveal Next Stanza"):
-        new_stanza = stanzas[st.session_state.stanza_index]
-        placeholder = st.empty()
-        streamed_text = ""
-        
-        random_delay_choice = random.choice([1, 2, 3, 4, 5])
-        delay_mapping = {1: 0.02, 2: 0.03, 3: 0.04, 4: 0.05, 5: 0.6}
-        selected_delay = delay_mapping[random_delay_choice]
-        
-        for char in new_stanza:
-            streamed_text += char
-            placeholder.markdown(streamed_text)
-            time.sleep(selected_delay)
-        st.session_state.revealed_stanzas.append(new_stanza)
-        st.session_state.stanza_index += 1
-else:
+if st.button("Begin Poem"):
+    st.session_state.started = True
+
+if st.session_state.started:
+    poem_html = markdown.markdown(poem, extensions=[Nl2BrExtension()])
+
+    # Stream entire poem character-by-character in HTML
+    placeholder = st.empty()
+    temp_html = ""
+    for char in poem_html:
+        temp_html = f'<div class="fade-shadow">{poem_html[:len(temp_html) + 1]}</div>'
+        placeholder.markdown(temp_html := temp_html + char, unsafe_allow_html=True)
+        time.sleep(0.003)  # adjust for smoother/slower reveal
+
     st.write("You've reached the end of the poem. Thank you for journeying with me!")
