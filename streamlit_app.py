@@ -98,7 +98,7 @@ def letter_fade_html(html_text: str, delay_increment: float = 0.015) -> str:
 # 5) Convert poem from naive Markdown => HTML => per-letter spans
 poem_html = naive_markdown_to_html(poem)
 # Increase delay_increment to slow down the fade-in effect (from 0.015 to 0.05 seconds)
-poem_html = letter_fade_html(poem_html, delay_increment=0.05)
+poem_html = letter_fade_html(poem_html, delay_increment=0.03)
 
 # 6) Show UI
 st.title("Conveniently White")
