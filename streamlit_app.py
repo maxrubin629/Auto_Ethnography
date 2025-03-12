@@ -3,17 +3,17 @@ import markdown
 from markdown.extensions.nl2br import Nl2BrExtension
 import time
 
-st.set_page_config(page_title="Conveniently White", layout="centered")
+st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
 
-# Custom CSS for shadow fade-in
+# CSS Fade-in from shadows animation
 st.markdown("""
 <style>
 @keyframes fadeInShadow {
-    from { opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.8); }
-    to { opacity: 1; text-shadow: none; }
+    0% { opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.9); }
+    100% { opacity: 1; text-shadow: none; }
 }
 .fade-in-shadow {
-    animation: fadeInShadow 1.5s ease-out forwards;
+    animation: fadeInShadow 2s ease forwards;
     opacity: 0;
     font-size: 18px;
     line-height: 1.6;
@@ -22,10 +22,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Title & Intro
 st.title("Conveniently White")
+st.write("by Max Rubin")
 st.write("_An Interactive Slam Poem_\n\nClick **Begin Poem** to experience it unfold in real-time.")
 
-# Your full poem here (as defined previously)
+# Your poem split into lines
 poem = """**They ask me,**  
 “Are Jews white?”  
 and I pause.  
@@ -198,37 +200,7 @@ _“never fully.”_
 the confusion that wonders  
 _“why is that?”_  
 the voice that whispers back  
-_“because you’re Jewish”_
-
-**And when someone comes up and asks,**  
-_“You have a Jewish nose — are you Jewish?”_  
-I think to myself:  
-is that a question,  
-or an accusation?
-
-**My skin doesn’t shield**  
-generations of trauma,  
-doesn’t erase stories  
-my family never fully tells—  
-but I _carry_ them  
-in my bones,  
-in my breath,  
-in the silence  
-when someone asks,  
-
-_“Are Jews white?”_
-
-**Because the truth**  
-is deeper  
-than skin,  
-more complicated  
-than color,  
-more real  
-than convenient labels  
-that fade  
-when the hate becomes  
-inconvenient  
-to explain.
+_“because you’re Jewish.”_
 
 **I am Jewish.**  
 A testament to my family’s resilience,  
@@ -247,21 +219,22 @@ I’ll tell you:
 **it’s more complicated  
 than that.**"""
 
+poem_lines = poem.split('\n')
+
 if "started" not in st.session_state:
     st.session_state.started = False
 
 if st.button("Begin Poem"):
     st.session_state.started = True
 
-if st.session_state.started:
-    poem_html = markdown.markdown(poem, extensions=[Nl2BrExtension()])
+placeholder = st.empty()
 
-    # Stream entire poem character-by-character in HTML
-    placeholder = st.empty()
-    temp_html = ""
-    for char in poem_html:
-        temp_html = f'<div class="fade-shadow">{poem_html[:len(temp_html) + 1]}</div>'
-        placeholder.markdown(temp_html := temp_html + char, unsafe_allow_html=True)
-        time.sleep(0.003)  # adjust for smoother/slower reveal
+if st.session_state.started:
+    displayed = ""
+    for line in poem_lines:
+        displayed += line + "\n"  # Keep adding lines
+        poem_html = markdown.markdown(displayed, extensions=[Nl2BrExtension()])
+        placeholder.markdown(f"<div class='fade-in-shadow'>{poem_html}</div>", unsafe_allow_html=True)
+        time.sleep(0.3)  # Adjust speed as desired
 
     st.write("You've reached the end of the poem. Thank you for journeying with me!")
