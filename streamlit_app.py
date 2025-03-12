@@ -27,90 +27,72 @@ st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey 
 
 # -- Full poem stanzas --
 stanzas = [
-     """
-     **They ask me,**  
-     “Are Jews white?”  
-     and I pause.  
-     A single breath  
-     holds centuries  
-     of contradiction.
-     """,
-     """
-     **See, my skin is fair,**  
-     but the history beneath runs deep  
-     in colors you can’t quite see,  
-     a silent tapestry of trauma  
-     woven through generations.
-     """,
-     """
-     **Imagine me, seven, in LA,**  
-     minding my own business,  
-     kippah balanced on my head  
-     like a crown  
-     unashamed,  
-     unaware  
-     of the cost  
-     of visibility.
-     """,
-     """
-     **Until words slice the air—**  
-     slurs hurled  
-     like rocks,  
-     sharp enough  
-     to carve doubt  
-     into a child’s courage.
-     """,
-     """
-     **My father knew this pain**  
-     on Philadelphia streets,  
-     swastikas scratched into his car,  
-     his body bruised by fists,  
-     scars carried quietly,  
-     a trauma so deep  
-     it only speaks in whispers —  
-     or not at all.
-     """,
-     """
-     **His grandparents fled Ukraine**  
-     to escape the shadow  
-     of pogroms,  
-     anti-Jewish violence,  
-     hate-filled riots,  
-     stories silenced  
-     by pain too raw  
-     to speak aloud,  
-     ghosts whisper  
-     in half-forgotten Yiddish sighs.
-     """,
-     """
-     **My mother’s family lived in Morocco for centuries,**  
-     skin much darker than mine,  
-     generations born into languages older than borders,  
-     until Nazis reached Casablanca streets,  
-     signs posted on synagogues asking for names  
-     and numbers,  
-     listing Jews like livestock.
-     """,
-     """
-     **They fled poverty,**  
-     fear, and hunger,  
-     crossed oceans to Oklahoma,  
-     where children pawed my grandmother’s curls  
-     literally searching for horns,  
-     hooves,  
-     tails —  
-     for devils their parents swore  
-     Jews must be.
-     """,
-     """
-     **I have her voice recorded,**  
-     telling me softly,  
-     how strange it felt  
-     to have her humanity questioned  
-     by curious fingers,  
-     innocent and cruel  
-     in ignorance.
-     """,
+     """**They ask me,**  
+“Are Jews white?”  
+ and I pause.  
+ A single breath  
+ holds centuries  
+ of contradiction.""",
+     """**See, my skin is fair,**  
+ but the history beneath runs deep  
+ in colors you can’t quite see,  
+ a silent tapestry of trauma  
+ woven through generations.""",
+     """**Imagine me, seven, in LA,**  
+ minding my own business,  
+ kippah balanced on my head  
+ like a crown  
+ unashamed,  
+ unaware  
+ of the cost  
+ of visibility.""",
+     """**Until words slice the air—**  
+ slurs hurled  
+ like rocks,  
+ sharp enough  
+ to carve doubt  
+ into a child’s courage.""",
+     """**My father knew this pain**  
+ on Philadelphia streets,  
+ swastikas scratched into his car,  
+ his body bruised by fists,  
+ scars carried quietly,  
+ a trauma so deep  
+ it only speaks in whispers —  
+ or not at all.""",
+     """**His grandparents fled Ukraine**  
+ to escape the shadow  
+ of pogroms,  
+ anti-Jewish violence,  
+ hate-filled riots,  
+ stories silenced  
+ by pain too raw  
+ to speak aloud,  
+ ghosts whisper  
+ in half-forgotten Yiddish sighs.""",
+     """**My mother’s family lived in Morocco for centuries,**  
+ skin much darker than mine,  
+ generations born into languages older than borders,  
+ until Nazis reached Casablanca streets,  
+ signs posted on synagogues asking for names  
+ and numbers,  
+ listing Jews like livestock.""",
+     """**They fled poverty,**  
+ fear, and hunger,  
+ crossed oceans to Oklahoma,  
+ where children pawed my grandmother’s curls  
+ literally searching for horns,  
+ hooves,  
+ tails —  
+ for devils their parents swore  
+ Jews must be.""",
+     """**I have her voice recorded,**  
+ telling me softly,  
+ how strange it felt  
+ to have her humanity questioned  
+ by curious fingers,  
+ innocent and cruel  
+ in ignorance.""",
      """
      **Yet, they say we’re white —**  
      conveniently white,  
