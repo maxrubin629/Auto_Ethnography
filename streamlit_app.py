@@ -14,7 +14,7 @@ st.markdown("""
 }
 
 .fade-in-shadow {
-    animation: fadeInShadow 2s ease forwards;
+    animation: fadeInShadow 4s ease forwards;
     opacity: 0;
     font-size:18px;
     line-height:1.6;
