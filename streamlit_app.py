@@ -272,7 +272,7 @@ if st.session_state.get("started", False):
         for char in stanza_html:
             displayed += char
             placeholder.markdown(displayed, unsafe_allow_html=True)
-            time.sleep(0.002)  # adjust speed here
+            time.sleep(0.01)  # adjust speed here
 
         # Keep revealed stanzas above
         st.markdown(f'<div class="fade-in-shadow">{stanza_html}</div>', unsafe_allow_html=True)
