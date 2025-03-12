@@ -1,38 +1,13 @@
 import streamlit as st
-import re
+import time
 
-st.set_page_config(page_title="Conveniently White", layout="centered")
+st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
 
-# Basic fade-in CSS
-st.markdown("""
-<style>
-@keyframes fadeInFromShadow {
-    0%   { opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.9); }
-    100% { opacity: 1; text-shadow: none; }
-}
-.fade-in {
-    animation: fadeInFromShadow 1.5s ease-in-out forwards;
-    opacity: 0;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-</style>
-""", unsafe_allow_html=True)
-
+# Title and instructions
 st.title("Conveniently White")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
-# Minimal "parser" for bold, italics, and line breaks
-def naive_markdown_to_html(text):
-    # Convert **bold** -> <b>bold</b>
-    text = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", text)
-    # Convert _italics_ -> <i>italics</i>
-    text = re.sub(r"_(.*?)_", r"<i>\1</i>", text)
-    # Convert line breaks to <br>
-    text = text.replace("\n", "<br>")
-    return text
-
+# Define your full poem stanzas
 stanzas = [
      """
      **They ask me,**  
@@ -282,18 +257,30 @@ stanzas = [
      """
  ]
 
+# Initialize session state for tracking revealed stanzas and current index
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
+if "revealed_stanzas" not in st.session_state:
+    st.session_state.revealed_stanzas = []
 
-# Reveal stanzas with fade-in
-for i in range(st.session_state.stanza_index):
-    stanza_html = naive_markdown_to_html(stanzas[i].strip())
-    st.markdown(f"<div class='fade-in'>{stanza_html}</div>", unsafe_allow_html=True)
+# Display all already revealed stanzas fully
+for stanza in st.session_state.revealed_stanzas:
+    st.markdown(stanza)
 
-# Reveal button
+# Button to reveal the next stanza with streaming effect
 if st.session_state.stanza_index < len(stanzas):
     if st.button("Reveal Next Stanza"):
+        # Get the next stanza to reveal
+        new_stanza = stanzas[st.session_state.stanza_index]
+        placeholder = st.empty()  # Placeholder for streaming text
+        streamed_text = ""
+        # Stream the text letter by letter
+        for char in new_stanza:
+            streamed_text += char
+            placeholder.markdown(streamed_text)
+            time.sleep(0.03)  # Adjust this value to control speed
+        # Save the fully revealed stanza in session state
+        st.session_state.revealed_stanzas.append(new_stanza)
         st.session_state.stanza_index += 1
-        st.experimental_rerun()
 else:
     st.write("You've reached the end of the poem. Thank you for journeying with me!")
