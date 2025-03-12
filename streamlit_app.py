@@ -1,10 +1,32 @@
 import streamlit as st
+import time
 
+# Set page config
 st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
 
+# Define custom CSS for fade-in shadow effect
+st.markdown(
+    """
+    <style>
+    @keyframes fadeIn {
+        0% { opacity: 0; text-shadow: 0px 0px 10px rgba(0, 0, 0, 1); }
+        50% { opacity: 0.5; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); }
+        100% { opacity: 1; text-shadow: 0px 0px 0px rgba(0, 0, 0, 0); }
+    }
+
+    .fade-in {
+        animation: fadeIn 2s ease-in-out;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Title
 st.title("Conveniently White")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
+# Stanzas
 stanzas = [
      """
      **They ask me,**  
@@ -253,20 +275,27 @@ stanzas = [
      than that.**
      """
  ]
-
-# Stanza idex
+# Stanza index tracking
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
 
+# Function to stream text character by character
+def stream_text(text):
+    placeholder = st.empty()
+    streamed_text = ""
+    for char in text:
+        streamed_text += char
+        placeholder.markdown(f"<p class='fade-in'>{streamed_text}</p>", unsafe_allow_html=True)
+        time.sleep(0.03)  # Adjust speed
 
-# show revealed stanzas
+# Show revealed stanzas
 for i in range(st.session_state.stanza_index):
-    st.markdown(stanzas[i])
+    st.markdown(f"<p class='fade-in'>{stanzas[i]}</p>", unsafe_allow_html=True)
 
-# button AFTER new stanza
+# Reveal next stanza with animation
 if st.session_state.stanza_index < len(stanzas):
     if st.button("Reveal Next Stanza"):
         st.session_state.stanza_index += 1
-        st.rerun()
+        stream_text(stanzas[st.session_state.stanza_index - 1])
 else:
     st.write("You've reached the end of the poem. Thank you for going on this journey with me!")
