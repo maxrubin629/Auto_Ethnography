@@ -43,7 +43,7 @@ a trauma so deep
 it only speaks in whispers —
 or not at all.
 
-**His grandparents fled Ukraine**
+**His family fled Ukraine**
 to escape the shadow
 of pogroms,
 anti-Jewish violence,
@@ -220,7 +220,7 @@ woven from Morocco
 to Ukraine
 to Philadelphia
 to LA.
-Our whiteness
+Our 'whiteness'
 never fully protected us,
 and never defined
 who we are.
