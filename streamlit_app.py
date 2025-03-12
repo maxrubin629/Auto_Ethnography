@@ -301,13 +301,13 @@ def create_letter_animation_html(html_text, delay_increment=0.04):
 
 st.title("Conveniently White")
 st.write("by Max Rubin")
-st.write("_An Interactive Slam Poem_\n\nClick **Begin Poem** to see it gently emerge letter by letter from shadows.")
+st.write("_An 'Interactive' Slam Poem_\n\nClick **Reveal my Story** to see it gently emerge letter by letter from shadows.")
 
 if "show_poem" not in st.session_state:
     st.session_state.show_poem = False
 
 # button to show poem
-if st.button("Reveal the poem"):
+if st.button("Reveal my Story"):
     st.session_state.show_poem = True
 
 # Pretty animation for the reveal
