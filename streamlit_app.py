@@ -239,7 +239,7 @@ st.markdown("""
     display: inline-block;
     opacity: 0;
     animation-name: fadeInLetter;
-    animation-duration: 0.9s; /* Slightly slower animation */
+    animation-duration: 0.95s; /* Slightly slower animation */
     animation-fill-mode: forwards;
     margin: 0;
     white-space: pre-wrap;
@@ -263,7 +263,7 @@ def convert_markdown_to_html(text):
     text = text.replace('\n', '<br>')
     return text
 
-def create_letter_animation_html(html_text, delay_increment=0.012):
+def create_letter_animation_html(html_text, delay_increment=0.025):
     """
     Wraps each visible character with animation spans while preserving HTML tags
     """
