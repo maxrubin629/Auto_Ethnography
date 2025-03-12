@@ -3,11 +3,10 @@ import time
 
 st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
 
-# Title and instructions
 st.title("Conveniently White")
+st.write("   by, Max Rubin")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
-# Define your full poem stanzas
 stanzas = [
     """**They ask me,**  
 “Are Jews white?”  
@@ -230,30 +229,28 @@ I’ll tell you:
 **it’s more complicated  
 than that.**"""
 ]
-
-# Initialize session state for tracking revealed stanzas and current index
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
 if "revealed_stanzas" not in st.session_state:
     st.session_state.revealed_stanzas = []
 
-# Display all already revealed stanzas fully
 for stanza in st.session_state.revealed_stanzas:
     st.markdown(stanza)
 
-# Button to reveal the next stanza with streaming effect
 if st.session_state.stanza_index < len(stanzas):
     if st.button("Reveal Next Stanza"):
-        # Get the next stanza to reveal
         new_stanza = stanzas[st.session_state.stanza_index]
-        placeholder = st.empty()  # Placeholder for streaming text
+        placeholder = st.empty()
         streamed_text = ""
-        # Stream the text letter by letter
+        
+        random_delay_choice = random.choice([1, 2, 3])
+        delay_mapping = {1: 0.02, 2: 0.025, 3: 0.03}
+        selected_delay = delay_mapping[random_delay_choice]
+        
         for char in new_stanza:
             streamed_text += char
             placeholder.markdown(streamed_text)
-            time.sleep(0.03)  # Adjust this value to control speed
-        # Save the fully revealed stanza in session state
+            time.sleep(selected_delay)
         st.session_state.revealed_stanzas.append(new_stanza)
         st.session_state.stanza_index += 1
 else:
