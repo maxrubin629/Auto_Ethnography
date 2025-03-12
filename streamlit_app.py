@@ -50,7 +50,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 3) Simple "naive" bold/italics if you want them:
+# 3) Simple "naive" bold/italics converter:
 def naive_markdown_to_html(text: str) -> str:
     """
     Converts **bold** to <b></b> and _italics_ to <i></i>.
@@ -58,11 +58,11 @@ def naive_markdown_to_html(text: str) -> str:
     This won't parse advanced Markdown features like # headings, lists, etc.
     """
     # convert **bold** => <b></b>
-    text = re.sub(r"\\*\\*(.*?)\\*\\*", r"<b>\\1</b>", text)
+    text = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", text)
     # convert _italics_ => <i></i>
-    text = re.sub(r"_(.*?)_", r"<i>\\1</i>", text)
+    text = re.sub(r"_(.*?)_", r"<i>\1</i>", text)
     # replace literal newlines with <br>
-    text = text.replace('\\n', '<br>')
+    text = text.replace('\n', '<br>')
     return text
 
 # 4) Wrap each visible character in a <span> with an incrementing animation-delay
