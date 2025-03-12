@@ -1,36 +1,32 @@
 import streamlit as st
-import time
 
 # Set page config
-st.set_page_config(page_title="Conveniently White: An Interactive Slam Poem", layout="centered")
+st.set_page_config(page_title="Conveniently White", layout="centered")
 
-# Define custom CSS for fade-in shadow effect
-st.markdown(
-    """
-    <style>
-    @keyframes fadeIn {
-        0% { opacity: 0; text-shadow: 0px 0px 10px rgba(0, 0, 0, 1); }
-        50% { opacity: 0.5; text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); }
-        100% { opacity: 1; text-shadow: 0px 0px 0px rgba(0, 0, 0, 0); }
-    }
+# Custom CSS for fade-in animation
+st.markdown("""
+<style>
+@keyframes fadeInFromShadow {
+    0% {opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.9);}
+    100% { opacity: 1; text-shadow: none; }
+}
 
-    .fade-in {
-        animation: fadeIn 2s ease-in-out;
-        font-size: 18px;
-        font-weight: bold;
-        line-height: 1.6;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+.fade-in {
+    animation: fadeInFromShadow 2.5s ease-in-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInFromShadow {
+    to { opacity: 1; text-shadow: none; }
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Title
 st.title("Conveniently White")
-st.write("by, Max Rubin")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
-# The magnificent poem
+# Full poem stanzas
 stanzas = [
     "**They ask me,**  \n“Are Jews white?”  \nand I pause.  \nA single breath  \nholds centuries  \nof contradiction.",
     "**See, my skin is fair,**  \nbut the history beneath runs deep  \nin colors you can’t quite see,  \na silent tapestry of trauma  \nwoven through generations.",
@@ -59,28 +55,23 @@ stanzas = [
     "**So ask me again —**  \n_“Are Jews white?”_  \nI’ll tell you:  \n**it’s more complicated  \nthan that.**"
 ]
 
-# Track which stanza is currently revealed
+# Track current stanza index
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
 
-# Function to display streaming text with a delay
-def stream_text(text):
-    placeholder = st.empty()
-    displayed_text = ""
-    
-    for char in text:
-        displayed_text += char
-        placeholder.markdown(f"<p class='fade-in'>{displayed_text}</p>", unsafe_allow_html=True)
-        time.sleep(0.02)  # Adjust speed for effect
+# Title and instructions
+st.divider()
+st.markdown("# Conveniently White")
+st.markdown("_An Interactive Slam Poem_")
 
-# Show revealed stanzas
-for i in range(st.session_state.stanza_index):
-    st.write(stanzas[i])  # Use st.write() for Markdown formatting
+# Display stanzas up to the current index with fade-in effect
+for stanza in stanzas[:st.session_state.stanza_index]:
+    st.markdown(f'<div class="fade-in">{stanza.strip()}</div><br>', unsafe_allow_html=True)
 
-# Reveal next stanza with animation
+# Reveal Next Stanza button
 if st.session_state.stanza_index < len(stanzas):
     if st.button("Reveal Next Stanza"):
         st.session_state.stanza_index += 1
-        stream_text(stanzas[st.session_state.stanza_index - 1])
+        st.rerun()
 else:
-    st.write("You've reached the end of the poem. Thank you for going on this journey with me!")
+    st.write("You've reached the end of the poem. Thank you for journeying with me!")
