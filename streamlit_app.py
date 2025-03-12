@@ -1,4 +1,5 @@
 import streamlit as st
+import re
 import textwrap
 
 st.set_page_config(page_title="Conveniently White", layout="centered")
@@ -25,40 +26,76 @@ I'll tell you:
 than that.**
 """)
 
-# Custom CSS for letter fade-in effect using Streamlit's built-in markdown capabilities
+# Custom CSS for letter fade-in animation
 st.markdown("""
 <style>
+@keyframes fadeInLetter {
+    0%   { opacity: 0; text-shadow: 0px 0px 10px rgba(0,0,0,0.9); }
+    100% { opacity: 1; text-shadow: none; }
+}
+
+.letter-fade {
+    display: inline-block;
+    opacity: 0;
+    animation-name: fadeInLetter;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
 .poem-container {
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
 }
-
-/* Animation for the entire poem */
-@keyframes fadeIn {
-    from { opacity: 0; text-shadow: 0px 0px 10px rgba(0,0,0,0.9); }
-    to { opacity: 1; text-shadow: none; }
-}
-
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 3s ease-in-out forwards;
-}
-
-/* Staggered animations for poem sections */
-.stanza {
-    opacity: 0;
-}
-
-.stanza-1 { animation: fadeIn 2s ease-in-out 0.5s forwards; }
-.stanza-2 { animation: fadeIn 2s ease-in-out 2.5s forwards; }
-.stanza-3 { animation: fadeIn 2s ease-in-out 4.5s forwards; }
 </style>
 """, unsafe_allow_html=True)
+
+def convert_markdown_to_html(text):
+    """Convert markdown bold and italic to HTML tags"""
+    # Convert **bold** to <strong>bold</strong>
+    text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', text)
+    # Convert *italic* to <em>italic</em>
+    text = re.sub(r'\*(.*?)\*', r'<em>\1</em>', text)
+    # Convert newlines to <br>
+    text = text.replace('\n', '<br>')
+    return text
+
+def create_letter_animation_html(html_text, delay_increment=0.015):
+    """
+    Wraps each visible character with animation spans while preserving HTML tags
+    """
+    result = []
+    delay = 0.0
+    in_tag = False
+    
+    for char in html_text:
+        if char == '<':
+            in_tag = True
+            result.append(char)
+        elif char == '>':
+            in_tag = False
+            result.append(char)
+        elif in_tag:
+            # Inside an HTML tag, don't animate
+            result.append(char)
+        else:
+            # Visible character, add animation
+            if char.strip():  # If not just whitespace
+                span = f'<span class="letter-fade" style="animation-delay:{delay:.3f}s">{char}</span>'
+                result.append(span)
+                delay += delay_increment
+            else:
+                # Preserve whitespace
+                result.append(char)
+    
+    return ''.join(result)
 
 # UI Structure
 st.title("Conveniently White")
 st.write("by Max Rubin")
-st.write("_An Interactive Slam Poem_\n\nClick **Begin Poem** to see it gently emerge from shadows.")
+st.write("_An Interactive Slam Poem_\n\nClick **Begin Poem** to see it gently emerge letter by letter from shadows.")
 
 # Initialize session state
 if "show_poem" not in st.session_state:
@@ -68,28 +105,17 @@ if "show_poem" not in st.session_state:
 if st.button("Begin Poem"):
     st.session_state.show_poem = True
 
-# Display poem with staggered animation when triggered
+# Display the animated poem when triggered
 if st.session_state.show_poem:
-    # Split poem into stanzas for staggered animation
-    stanzas = poem.split("\n\n")
+    # Process the poem text
+    html_poem = convert_markdown_to_html(poem)
+    animated_poem = create_letter_animation_html(html_poem)
     
-    html = '<div class="poem-container">'
-    for i, stanza in enumerate(stanzas):
-        # Replace markdown with HTML
-        stanza_html = stanza.replace("**", "<strong>").replace("**", "</strong>")
-        stanza_html = stanza_html.replace("*", "<em>").replace("*", "</em>")
-        stanza_html = stanza_html.replace("\n", "<br>")
-        
-        # Add stanza with appropriate animation class
-        html += f'<div class="stanza stanza-{i+1}">{stanza_html}</div><br>'
+    # Display in a container
+    st.markdown(
+        f'<div class="poem-container">{animated_poem}</div>',
+        unsafe_allow_html=True
+    )
     
-    html += '</div>'
-    
-    # Display the poem
-    st.markdown(html, unsafe_allow_html=True)
-    
-    # Add final message after a delay using empty space and container
-    final_message = st.empty()
-    import time
-    time.sleep(6.5)  # Wait for animations to complete
-    final_message.write("You've reached the end of the poem. Thank you for journeying with me!")
+    # Show completion message
+    st.write("You've reached the end of the poem. Thank you for journeying with me!")
