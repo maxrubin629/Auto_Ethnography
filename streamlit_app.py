@@ -1,34 +1,38 @@
 import streamlit as st
-import markdown
-from markdown.extensions.nl2br import Nl2BrExtension
+import re
 
-# Set page config
 st.set_page_config(page_title="Conveniently White", layout="centered")
 
-# Custom CSS for fade-in animation
+# Basic fade-in CSS
 st.markdown("""
 <style>
 @keyframes fadeInFromShadow {
-    0% { opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.9); }
+    0%   { opacity: 0; text-shadow: 0px 0px 12px rgba(0,0,0,0.9); }
     100% { opacity: 1; text-shadow: none; }
 }
-
 .fade-in {
     animation: fadeInFromShadow 1.5s ease-in-out forwards;
     opacity: 0;
-    /* Adjust text size, spacing as desired: */
-    font-size: 18px; 
-    line-height: 1.6; 
+    font-size: 18px;
+    line-height: 1.6;
     margin-bottom: 1rem;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# Title & instructions
 st.title("Conveniently White")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
-# Full poem stanzas
+# Minimal "parser" for bold, italics, and line breaks
+def naive_markdown_to_html(text):
+    # Convert **bold** -> <b>bold</b>
+    text = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", text)
+    # Convert _italics_ -> <i>italics</i>
+    text = re.sub(r"_(.*?)_", r"<i>\1</i>", text)
+    # Convert line breaks to <br>
+    text = text.replace("\n", "<br>")
+    return text
+
 stanzas = [
      """
      **They ask me,**  
@@ -278,21 +282,13 @@ stanzas = [
      """
  ]
 
-
-# Track which stanza is currently revealed
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
 
-# Show revealed stanzas with fade-in
+# Reveal stanzas with fade-in
 for i in range(st.session_state.stanza_index):
-    html_stanza = markdown.markdown(
-        stanzas[i].strip(),
-        extensions=[Nl2BrExtension()]  # convert newlines to <br>
-    )
-    st.markdown(
-        f'<div class="fade-in">{html_stanza}</div>',
-        unsafe_allow_html=True
-    )
+    stanza_html = naive_markdown_to_html(stanzas[i].strip())
+    st.markdown(f"<div class='fade-in'>{stanza_html}</div>", unsafe_allow_html=True)
 
 # Reveal button
 if st.session_state.stanza_index < len(stanzas):
