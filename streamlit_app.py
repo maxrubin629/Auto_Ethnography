@@ -15,8 +15,8 @@ of contradiction.
 **See, my skin is fair,**
 but the history beneath runs deep
 in colors you can't quite see,
-a silent tapestry of trauma
-woven through generations.
+a silent portrait of trauma
+painted over generations.
 
 **Imagine me, age six,**
 minding my own business,
