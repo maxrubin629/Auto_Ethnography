@@ -29,7 +29,6 @@ than that.**
 """)
 
 # 2) Custom CSS for letter fade-in from shadow
-# Each letter uses a different 'animation-delay' so they appear sequentially.
 st.markdown("""
 <style>
 @keyframes fadeInLetter {
@@ -42,7 +41,7 @@ st.markdown("""
     display: inline-block;
     opacity: 0;
     animation-name: fadeInLetter;
-    animation-duration: 0.7s; /* how long each letter's fade lasts */
+    animation-duration: 0.7s; /* duration of the fade */
     animation-fill-mode: forwards;
     margin: 0;
     white-space: pre-wrap; /* preserve newlines/spaces */
@@ -98,7 +97,8 @@ def letter_fade_html(html_text: str, delay_increment: float = 0.015) -> str:
 
 # 5) Convert poem from naive Markdown => HTML => per-letter spans
 poem_html = naive_markdown_to_html(poem)
-poem_html = letter_fade_html(poem_html)
+# Increase delay_increment to slow down the fade-in effect (from 0.015 to 0.05 seconds)
+poem_html = letter_fade_html(poem_html, delay_increment=0.05)
 
 # 6) Show UI
 st.title("Conveniently White")
@@ -112,6 +112,5 @@ if st.button("Begin Poem"):
     st.session_state.show_poem = True
 
 if st.session_state.show_poem:
-    # display entire poem at once, each character with a staged fade
     st.markdown(poem_html, unsafe_allow_html=True)
     st.write("You've reached the end of the poem. Thank you for journeying with me!")
