@@ -27,9 +27,10 @@ st.markdown(
 
 # Title
 st.title("Conveniently White")
+st.write("by, Max Rubin")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
-# Full poem stanzas
+# The magnificent poem
 stanzas = [
     "**They ask me,**  \n“Are Jews white?”  \nand I pause.  \nA single breath  \nholds centuries  \nof contradiction.",
     "**See, my skin is fair,**  \nbut the history beneath runs deep  \nin colors you can’t quite see,  \na silent tapestry of trauma  \nwoven through generations.",
@@ -58,11 +59,28 @@ stanzas = [
     "**So ask me again —**  \n_“Are Jews white?”_  \nI’ll tell you:  \n**it’s more complicated  \nthan that.**"
 ]
 
+# Track which stanza is currently revealed
 if "stanza_index" not in st.session_state:
     st.session_state.stanza_index = 0
 
-if st.button("Reveal Next Stanza"):
-    st.session_state.stanza_index += 1
+# Function to display streaming text with a delay
+def stream_text(text):
+    placeholder = st.empty()
+    displayed_text = ""
+    
+    for char in text:
+        displayed_text += char
+        placeholder.markdown(f"<p class='fade-in'>{displayed_text}</p>", unsafe_allow_html=True)
+        time.sleep(0.02)  # Adjust speed for effect
 
+# Show revealed stanzas
 for i in range(st.session_state.stanza_index):
-    st.markdown(f"<p class='fade-in'>{stanzas[i]}</p>", unsafe_allow_html=True)
+    st.write(stanzas[i])  # Use st.write() for Markdown formatting
+
+# Reveal next stanza with animation
+if st.session_state.stanza_index < len(stanzas):
+    if st.button("Reveal Next Stanza"):
+        st.session_state.stanza_index += 1
+        stream_text(stanzas[st.session_state.stanza_index - 1])
+else:
+    st.write("You've reached the end of the poem. Thank you for going on this journey with me!")
