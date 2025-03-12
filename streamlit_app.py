@@ -21,6 +21,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("Conveniently White")
+st.write("   by, Max Rubin")
 st.write("_An Interactive Slam Poem_\n\nClick **Reveal Next Stanza** to journey through the layers of my story.")
 
 # Full poem stanzas
