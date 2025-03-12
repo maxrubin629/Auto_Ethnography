@@ -1,1 +1,2 @@
 streamlit
+markdown==3.4.1
