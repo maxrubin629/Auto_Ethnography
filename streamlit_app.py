@@ -4,7 +4,7 @@ import textwrap
 
 st.set_page_config(page_title="Conveniently White", layout="centered")
 
-# Define the poem as plain text with minimal indentation
+# My beautiful poem that doesn't like to work for some reason
 poem = textwrap.dedent("""**They ask me,**
 "Are Jews white?"
 and I pause.
@@ -232,7 +232,7 @@ I'll tell you:
 than that.**
 """)
 
-# Custom CSS for letter fade-in animation
+# Custom CSS for letter fade-in animation. Thanks chatty lol!
 st.markdown("""
 <style>
 @keyframes fadeInLetter {
@@ -260,11 +260,11 @@ st.markdown("""
 
 def convert_markdown_to_html(text):
     """Convert markdown bold and italic to HTML tags"""
-    # Convert **bold** to <strong>bold</strong>
+    
     text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', text)
-    # Convert *italic* to <em>italic</em>
+    
     text = re.sub(r'\*(.*?)\*', r'<em>\1</em>', text)
-    # Convert newlines to <br>
+    
     text = text.replace('\n', '<br>')
     return text
 
@@ -284,44 +284,43 @@ def create_letter_animation_html(html_text, delay_increment=0.04):
             in_tag = False
             result.append(char)
         elif in_tag:
-            # Inside an HTML tag, don't animate
+            
             result.append(char)
         else:
-            # Visible character, add animation
-            if char.strip():  # If not just whitespace
+            
+            if char.strip(): 
                 span = f'<span class="letter-fade" style="animation-delay:{delay:.3f}s">{char}</span>'
                 result.append(span)
                 delay += delay_increment
             else:
-                # Preserve whitespace
+               
                 result.append(char)
     
     return ''.join(result)
 
-# UI Structure
+
 st.title("Conveniently White")
 st.write("by Max Rubin")
 st.write("_An Interactive Slam Poem_\n\nClick **Begin Poem** to see it gently emerge letter by letter from shadows.")
 
-# Initialize session state
 if "show_poem" not in st.session_state:
     st.session_state.show_poem = False
 
-# Button to trigger poem display
-if st.button("Begin Poem"):
+# button to show poem
+if st.button("Reveal the poem"):
     st.session_state.show_poem = True
 
-# Display the animated poem when triggered
+# Pretty animation for the reveal
 if st.session_state.show_poem:
     # Process the poem text
     html_poem = convert_markdown_to_html(poem)
     animated_poem = create_letter_animation_html(html_poem)
     
-    # Display in a container
+    # put in a container
     st.markdown(
         f'<div class="poem-container">{animated_poem}</div>',
         unsafe_allow_html=True
     )
     
-    # Show completion message
-    st.write("You've reached the end of the poem. Thank you for journeying with me!")
+    # End poem
+    st.write("\nYou've reached the end of the poem. Thank you for going on this journey with me!")
